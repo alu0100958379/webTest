@@ -4,7 +4,7 @@
 
 function create_conn ()
 {
-	$ENV_SERVER = 0;
+	$ENV_SERVER = 1;
 
 	if ($ENV_SERVER == 0) {
 		$cons_usuario="root";
