@@ -4,7 +4,7 @@
 
 function create_conn ()
 {
-	$ENV_SERVER = 1;
+	$ENV_SERVER = 0;
 
 	if ($ENV_SERVER == 0) {
 		$cons_usuario="root";
@@ -35,12 +35,25 @@ function get_mode ()
 {
 	$obj_conexion = create_conn();
 	
-	$var_consulta= "select * from execution_mode";
-    	$var_resultado = $obj_conexion->query($var_consulta);
-	$var_resultado=mysqli_fetch_assoc($var_resultado);
+	$var_consulta= "SELECT * FROM execution_mode";
+    $var_resultado = $obj_conexion->query($var_consulta);
+	$var_resultado = mysqli_fetch_assoc($var_resultado);
 	
 	return $var_resultado;
 }
 
+function get_actual_pair($mode)
+{
+	$obj_conexion = create_conn();
+	if ($mode == "TRADING MODE") 
+		$var_consulta= "SELECT * FROM trading_stats WHERE state=0 AND id=(SELECT MAX(id) FROM trading_stats)";
+	else 
+		$var_consulta= "SELECT * FROM arbitraje_stats WHERE state=0 AND id=(SELECT MAX(id) FROM arbitraje_stats)";
+    
+	$var_resultado = $obj_conexion->query($var_consulta);
+	$var_resultado = mysqli_fetch_assoc($var_resultado);
+	
+	return $var_resultado;
+}
 ?>
 

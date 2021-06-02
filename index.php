@@ -32,6 +32,14 @@ include "functions.php"
 			$election = "BUY/SELL ARBITRAGE (STAKING)";
 		}
 	}
+	$pair = get_actual_pair($mode);
+	$crypto_route = "logo-";
+	if (isset($pair["symbol"])) {
+		$newphrase = str_replace("USDT", "", $pair["symbol"]);
+		$crypto_route = $crypto_route . strtolower($newphrase) . ".png";
+	}
+	print_r($crypto_route);
+
 ?>
 <html>
 	<head>
