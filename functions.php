@@ -1,6 +1,6 @@
 <?php
 
-$ENV_SERVER = 0;
+$ENV_SERVER = 1;
 
 function create_conn ()
 {
@@ -13,7 +13,7 @@ function create_conn ()
 		$cons_usuario="felipe";
 		$cons_contra="12345678";
 		$cons_base_datos="stats";
-		$cons_equipo="localhost";
+		$cons_equipo="18.168.255.244";
 	}
 	$obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
 	if(!$obj_conexion)
