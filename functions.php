@@ -1,9 +1,11 @@
 <?php
 
-$ENV_SERVER = 1;
+
 
 function create_conn ()
 {
+	$ENV_SERVER = 0;
+
 	if ($ENV_SERVER == 0) {
 		$cons_usuario="root";
 		$cons_contra="";
@@ -18,7 +20,7 @@ function create_conn ()
 	$obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
 	if(!$obj_conexion)
 	{
-		#echo "<h3>No se ha podido conectar PHP - MySQL, verifique sus datos.</h3><hr><br>";
+		echo "<h3>No se ha podido conectar PHP - MySQL, verifique sus datos.</h3><hr><br>";
 	}
 	else
 	{
