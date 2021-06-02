@@ -1,14 +1,20 @@
 <?php
 
+$ENV_SERVER = 0;
 
 function create_conn ()
 {
-	
-    $cons_usuario="root";
-    $cons_contra="";
-    $cons_base_datos="stats";
-    $cons_equipo="localhost";
-
+	if ($ENV_SERVER == 0) {
+		$cons_usuario="root";
+		$cons_contra="";
+		$cons_base_datos="stats";
+		$cons_equipo="localhost";
+	} else {
+		$cons_usuario="felipe";
+		$cons_contra="12345678";
+		$cons_base_datos="stats";
+		$cons_equipo="localhost";
+	}
 	$obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
 	if(!$obj_conexion)
 	{
