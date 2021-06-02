@@ -15,7 +15,7 @@ function create_conn ()
 		$cons_usuario="felipe";
 		$cons_contra="12345678";
 		$cons_base_datos="stats";
-		$cons_equipo="18.168.255.244";
+		$cons_equipo="localhost";
 	}
 	$obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
 	if(!$obj_conexion)
