@@ -1,7 +1,5 @@
 <?php
 
-
-
 function create_conn ()
 {
 	$ENV_SERVER = 0;
