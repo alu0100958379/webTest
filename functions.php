@@ -46,9 +46,9 @@ function get_actual_pair($mode)
 {
 	$obj_conexion = create_conn();
 	if ($mode == "TRADING MODE") 
-		$var_consulta= "SELECT * FROM trading_stats WHERE state=0 AND id=(SELECT MAX(id) FROM trading_stats)";
+		$var_consulta= "SELECT * FROM trading_stats WHERE id=(SELECT MAX(id) FROM trading_stats)";
 	else 
-		$var_consulta= "SELECT * FROM arbitraje_stats WHERE state=0 AND id=(SELECT MAX(id) FROM arbitraje_stats)";
+		$var_consulta= "SELECT * FROM arbitraje_stats WHERE id=(SELECT MAX(id) FROM arbitraje_stats)";
     
 	$var_resultado = $obj_conexion->query($var_consulta);
 	$var_resultado = mysqli_fetch_assoc($var_resultado);
