@@ -179,7 +179,7 @@ include "functions.php"
 </html>
 
 <script>
-/*setTimeout(function(){
+setTimeout(function(){
    window.location.reload(1);
-}, 5000);*/
+}, 5000);
 </script>
