@@ -29,11 +29,24 @@ function create_conn ()
 }
 
 
+function insert_mode ($options)
+{
+$obj_conexion = create_conn();
+	
+	//$var_consulta= "SELECT * FROM execution_mode";
+	$var_consulta= "INSERT INTO execution_mode (type,election) VALUES (".$options[0].",".$options[1].")";
+    $var_resultado = $obj_conexion->query($var_consulta);
+	$var_resultado = mysqli_fetch_assoc($var_resultado);
+	
+	return $var_resultado;
+}
+
+
 function get_mode ()
 {
 	$obj_conexion = create_conn();
 	
-	$var_consulta= "SELECT * FROM execution_mode";
+	$var_consulta= "SELECT * FROM execution_mode WHERE id=(SELECT MAX(id) FROM execution_mode)";
     $var_resultado = $obj_conexion->query($var_consulta);
 	$var_resultado = mysqli_fetch_assoc($var_resultado);
 	

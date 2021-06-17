@@ -2,6 +2,7 @@
 include "functions.php"
 ?>
 
+
 <?php
 	$mode_info = get_mode();
 	$mode = "";
@@ -52,17 +53,76 @@ include "functions.php"
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/custom-style.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 		<body class = "bg-light">
 		
+
+
+
+
+<!--
+<div id="actions">
+<select id="options">
+  <option value="" disabled selected>Select an option</option>
+  <option value="TRADING">TRADING</option>
+  <option value="ARBITRAJE">ARBITRAJE</option>
+</select>
+
+<select id="choices">
+  <option value="" disabled selected>Please select an option</option>
+</select>
+</div>
+<div id="cripto">CRIPTOMONEDA:<input type="text" size="10" id="campo" name="campo"/></div>
+
+<button class="btn" onclick="play()"><i class="fa fa-play"></i></button>
+<button class="btn" onclick="stop()"><i class="fa fa-stop"></i></button>
+-->
+
+
+
+
 		<div class="limiter">
 		<div class="container-login100">
 		<div class="wrap-login100" style="padding-bottom: 3%!important; ">
 		
+
+
+
+			<div class ="col-sm-12">
+				<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+			</div>
+			
+			<div class ="col-sm-12 extra">
+				<form class="myform">
+			  
+					<select id="options" class="custom-select">
+					  <option value="" disabled selected>Select an option</option>
+					  <option value="TRADING">TRADING</option>
+					  <option value="ARBITRAJE">ARBITRAJE</option>
+					</select><br><br>
+					<select id="choices" class="custom-select">
+					  <option value="" disabled selected>Please select an option</option>
+					</select><br><br>
+					<div id="cripto">
+						<label for="criptomoneda">CRIPTOMONEDA:</label>
+  						<input type="text" id="campo" name="campo"><br>
+					</div>
+					<div class="center">
+						<button class="btn" onclick="play()"><i class="fa fa-play"></i></button>
+						<button class="btn" onclick="stop()"><i class="fa fa-stop"></i></button>
+					</div>
+				</form>
+			</div>
+
+
+
+
 			<div class="container">
 				<div class="py-5 text-center" style="padding-top: 0!important; ">
-					<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 					<h2><?php echo $mode;?></h2>
 					<p class="lead"><?php echo $election;?></p>
 				</div>
@@ -178,8 +238,122 @@ include "functions.php"
 
 </html>
 
+
 <script>
+// Map your choices to your option value
+var lookup = {
+   'TRADING': ['Estrategia Customizada', 'Estrategia basada en EMA', 'Estrategia basada en patron envolvente'],
+   'ARBITRAJE': ['Arbitraje con transferencia', 'Arbitraje compra/venta'],
+};
+
+// When an option is changed, search the above for matching choices
+$('#options').on('change', function() {
+   // Set selected option as variable
+   var selectValue = $(this).val();
+
+   // Empty the target field
+   $('#choices').empty();
+   
+   // For each choice in the selected option
+   for (i = 0; i < lookup[selectValue].length; i++) {
+      // Output choice in the target field
+      $('#choices').append("<option value='" + lookup[selectValue][i] + "'>" + lookup[selectValue][i] + "</option>");
+   }
+});
+
+
+var control;
+
+function check(value) {
+	control = value;
+}
+
+function play() {
+	
+	$.ajax({
+		url: "req/check-start.php",
+		async: false,
+		success: function(output) {
+			check(output);
+			//alert(output);
+		}
+	});
+
+	if (control != '1' && control != '2') {
+		var m = document.getElementById("options");
+		var o = document.getElementById("choices");
+
+		var modo = m.value;
+		var opcion = o.value;
+
+		if (modo == "TRADING") {
+			modo = 1;
+			if (opcion == "Estrategia Customizada")
+				opcion = 1;
+			else if (opcion == "Estrategia basada en EMA")
+				opcion = 2;
+			else if (opcion == "Estrategia basada en patron envolvente")
+				opcion = 3;
+			else 
+				opcion = 0;
+		} else if (modo == "ARBITRAJE") { 
+			modo = 2;
+			if (opcion == "Arbitraje con transferencia")
+				opcion = 1;
+			else if (opcion == "Arbitraje compra/venta")
+				opcion = 2;
+			else 
+				opcion = 0;
+		} else {
+			modo = 0;
+			opcion = 0;
+		}
+		
+		var cripto = document.getElementById("campo");
+
+		$.ajax({
+			type: 'POST',
+			url: "req/get-start.php",
+			data: {
+				modo: modo,
+				opcion: opcion
+			},
+			success: function(output) {
+				//alert(output);
+			}
+		});
+
+		//console.log("play");
+		$.ajax({
+			url: "main.py",
+			method: 'post',
+			success: function(data)
+			{
+				alert(data);
+			}
+		});
+	}
+	else {
+		alert("Debe parar primero el programa");
+	}
+	
+}
+
+function stop() {
+	console.log("stop");
+	var invocation = new XMLHttpRequest();
+	var url = 'http://localhost:8000/stop';
+
+	if(invocation) {
+		invocation.open('GET', url, true);
+		//invocation.onreadystatechange = handler;
+		invocation.send();
+	}
+}
+
+
 setTimeout(function(){
    window.location.reload(1);
 }, 5000);
 </script>
+

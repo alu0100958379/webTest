@@ -188,7 +188,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 5%;
+  padding-top: 35px;
   padding-bottom: 10%;
 }
 
