@@ -14,13 +14,13 @@ arbitraje_state = 0
 
 
 def transfer_arb(binance_client, kucoin_client):
-    qty_aux = 10
-    transfer = kucoin_client.create_inner_transfer('main', 'trade', qty_aux)
-    print(transfer)
+    #qty_aux = 10
+    #transfer = kucoin_client.create_inner_transfer('main', 'trade', qty_aux)
+    #print(transfer)
     
-    print("\n")
-    deposits = kucoin_client.get_deposits('XEM')
-    print(deposits)
+    #print("\n")
+    #deposits = kucoin_client.get_deposits('XEM')
+    #print(deposits)
     
     print("\n")
     print("ARBITRAJE CON TRANSFERENCIA ENTRE EXCHANGES")
@@ -41,7 +41,7 @@ def transfer_arb(binance_client, kucoin_client):
     crypto_list = list(set(aux_binance_pairs) & set(aux_kucoin_pairs))
     crypto_list.remove("BCHSV")
     bn_fees = bn.bn_get_withdrawal_fees(binance_client)
-   
+    #print(bn_fees)
     
     for i in crypto_list:
         
@@ -65,13 +65,14 @@ def transfer_arb(binance_client, kucoin_client):
                 print("Binance -- KuCoin")
                 print(binance_price, " -- ", kucoin_price)
                 
-                min_withdr = bn_fees["assetDetail"][i]["minWithdrawAmount"]
+                min_withdr = float(bn_fees[i]["minWithdrawAmount"])
                 print("MINIMUN WITHDRAWAL : ", min_withdr)
                 
-                fees = bn_fees["assetDetail"][i]["withdrawFee"]
+                fees = float(bn_fees[i]["withdrawFee"])
                 print("FEES : ", fees)
-                
-                if fees > 0:
+
+                if fees != 0:
+
                     #x=(((x/z)*(1-y))-r)*v*(1-w)        Despejamos x para obtener min_usdt
                     min_usdt = abs((fees*kucoin_price*(0.001-1)*binance_price)/(kucoin_price*(0.001-1)*(0.001-1)-binance_price))
                     print("MINIMO DE USDT A GASTAR (contando comision de compra, transferencia y venta): ")
@@ -234,13 +235,17 @@ def transfer_arb(binance_client, kucoin_client):
                                                 if i["currency"] == "USDT":
                                                     usdt_aux = i["balance"]
                                             accounts = kucoin_client.get_accounts()
+                        else:
+                            print("comprobar cuanto tengo y si compró, vender")
                                             
                     functions.update_arbitraje()              
                     
                 else:
                     print("No hay fondos suficientes")
-         
+    
+    return True     
         
+
 def multi_operation_arb(binance_client, kucoin_client, sym):
     print("\n")
     print("ARBITRAJE HACIENDO COMPRA/VENTA SIN TRANSFERENCIA") 
@@ -269,6 +274,9 @@ def multi_operation_arb(binance_client, kucoin_client, sym):
         custom_buy_time = 0
        
         while custom_buy_time < 3600 and arbitraje_state == 0:
+            
+            if arbitraje_state == 1:
+                break
             
             sym_bn = sym + "USDT"
             binance_price = float((binance_client.get_symbol_ticker(symbol = sym_bn))["price"])
@@ -430,17 +438,19 @@ def multi_operation_arb(binance_client, kucoin_client, sym):
 
     else:
         print("El símbolo introducido no se encuentra en ambos exchanges")
-        
+
+    return True    
       
             
 def select_arbitrage (mode, binance_client, kucoin_client):
-    functions.insert_mode(2, mode)
-    
+    #functions.insert_mode(2, mode)
+    sym = functions.get_arb_symbol()
+
     if mode == 1:
-        transfer_arb(binance_client, kucoin_client)
+        return transfer_arb(binance_client, kucoin_client)
     
     if mode == 2:
-        print("\tINTRODUZCA SÍMBOLO PARA ARBITRAJE (Ej: btc)")
-        sym = input().upper()
-        multi_operation_arb(binance_client, kucoin_client, sym)
+        #print("\tINTRODUZCA SÍMBOLO PARA ARBITRAJE (Ej: btc)")
+        #sym = input().upper()
+        return multi_operation_arb(binance_client, kucoin_client, sym[0][1])
 

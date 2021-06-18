@@ -2,7 +2,6 @@
 include "functions.php"
 ?>
 
-
 <?php
 	$mode_info = get_mode();
 	$mode = "";
@@ -59,46 +58,15 @@ include "functions.php"
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 		<body class = "bg-light">
-		
-
-
-
-
-<!--
-<div id="actions">
-<select id="options">
-  <option value="" disabled selected>Select an option</option>
-  <option value="TRADING">TRADING</option>
-  <option value="ARBITRAJE">ARBITRAJE</option>
-</select>
-
-<select id="choices">
-  <option value="" disabled selected>Please select an option</option>
-</select>
-</div>
-<div id="cripto">CRIPTOMONEDA:<input type="text" size="10" id="campo" name="campo"/></div>
-
-<button class="btn" onclick="play()"><i class="fa fa-play"></i></button>
-<button class="btn" onclick="stop()"><i class="fa fa-stop"></i></button>
--->
-
-
-
 
 		<div class="limiter">
 		<div class="container-login100">
 		<div class="wrap-login100" style="padding-bottom: 3%!important; ">
-		
-
-
-
 			<div class ="col-sm-12">
 				<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-			</div>
-			
+			</div>	
 			<div class ="col-sm-12 extra">
-				<form class="myform">
-			  
+				<form class="myform">		  
 					<select id="options" class="custom-select">
 					  <option value="" disabled selected>Select an option</option>
 					  <option value="TRADING">TRADING</option>
@@ -107,19 +75,17 @@ include "functions.php"
 					<select id="choices" class="custom-select">
 					  <option value="" disabled selected>Please select an option</option>
 					</select><br><br>
-					<div id="cripto">
+					<div id="cripto" class="center">
 						<label for="criptomoneda">CRIPTOMONEDA:</label>
-  						<input type="text" id="campo" name="campo"><br>
+  						<input type="text" id="campo" name="campo" placeholder="Ej: btc"><br>
 					</div>
+					<br>
 					<div class="center">
 						<button class="btn" onclick="play()"><i class="fa fa-play"></i></button>
 						<button class="btn" onclick="stop()"><i class="fa fa-stop"></i></button>
 					</div>
 				</form>
 			</div>
-
-
-
 
 			<div class="container">
 				<div class="py-5 text-center" style="padding-top: 0!important; ">
@@ -309,29 +275,25 @@ function play() {
 			opcion = 0;
 		}
 		
-		var cripto = document.getElementById("campo");
+		var cripto_input = document.getElementById("campo").value;
+		if (modo == 2 && opcion == 2 && cripto_input.length == 0) {
+			alert("Se debe indicar un par. (Ej. btc)")
+		}
+		else {
+			$.ajax({
+				type: 'POST',
+				url: "req/get-start.php",
+				data: {
+					modo: modo,
+					opcion: opcion,
+					stack: cripto_input
+				},
+				success: function(output) {
+					//alert(output);
+				}
+			});
+		}
 
-		$.ajax({
-			type: 'POST',
-			url: "req/get-start.php",
-			data: {
-				modo: modo,
-				opcion: opcion
-			},
-			success: function(output) {
-				alert(output);
-			}
-		});
-
-		//console.log("play");
-		//$.ajax({
-		//	url: "main.py",
-		//	method: 'post',
-		//	success: function(data)
-		//	{
-		//		alert(data);
-		//	}
-		//});
 	}
 	else {
 		alert("Debe parar primero el programa");
@@ -341,28 +303,33 @@ function play() {
 
 function stop() {
 	console.log("Parando...");
-	/*
-	var invocation = new XMLHttpRequest();
-	var url = 'http://localhost:8000/stop';
-
-	if(invocation) {
-		invocation.open('GET', url, true);
-		//invocation.onreadystatechange = handler;
-		invocation.send();
-	}*/
 
 	$.ajax({
-		type: 'GET',
-		url: "http://18.168.255.244:8000/stop",
-	        success: function(output) {
-  	                //check(output);	
-  	        	alert(output);
-		},
-		error: function(xhr,ajaxOptions,thrownError){
-			alert(xhr);
-			alert(thrownError);
+		url: "req/check-start.php",
+		async: false,
+		success: function(output) {
+			check(output);
+			//alert(output);
 		}
 	});
+	if (control == '1' || control == '2') {
+
+		$.ajax({
+			type: 'GET',
+			url: "http://18.168.255.244:8000/stop",
+				success: function(output) {
+						//check(output);	
+					//alert(output);
+			},
+			error: function(xhr,ajaxOptions,thrownError){
+				alert(xhr);
+				alert(thrownError);
+			}
+		});
+	}
+	else {
+		alert("No hay nada corriendo");
+	}
 }
 
 

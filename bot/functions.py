@@ -17,7 +17,7 @@ def create_conn ():
         conn = mysql.connector.connect(
             host="localhost",
             user="felipe",
-            password="12345678",                #PRIMERO CAMBIAR Y LUEGO INSERTAR PASSWORD
+            password="12345678",
             database="stats",
             auth_plugin='mysql_native_password'
             )
@@ -29,6 +29,19 @@ def get_election():
     cursor = conn.cursor()
     
     query = "select * from execution_mode WHERE id IN (SELECT max(id) FROM execution_mode)"
+    cursor.execute(query)
+    record = cursor.fetchall()
+    
+    conn.close()
+
+    return record
+
+
+def get_arb_symbol():
+    conn = create_conn()
+    cursor = conn.cursor()
+    
+    query = "select * from arbitraje_sym WHERE id IN (SELECT max(id) FROM arbitraje_sym)"
     cursor.execute(query)
     record = cursor.fetchall()
     

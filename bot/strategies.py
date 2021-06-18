@@ -147,6 +147,8 @@ def strategy_scalping_custom (client):
         vuelta = vuelta + 1
         print("VUELTA NUMERO: ", vuelta)
 
+    return True
+
 
 def ema_strategy (client):
     print("\n")
@@ -288,24 +290,23 @@ def ema_strategy (client):
                         while pd.Series(open_orders).empty == False:
                             open_orders = client.get_open_orders(symbol = i["symbol"])
 
-            '''
-            
-                - Esperar a que el precio caiga por debajo de la ema 25 o ema 50
-                    - En caso de que pase por debajo de ema100, salir de la moneda
-                
-                - Cuando caiga, comprar en la siguiente vela que el cierre supere la ema 25
-                
-                - Una vez comprada, poner stop loss en ema50 y limit en 1,5*diferencia al stop loss
-                
-            '''
+    return True
+    '''
+    
+        - Esperar a que el precio caiga por debajo de la ema 25 o ema 50
+            - En caso de que pase por debajo de ema100, salir de la moneda
+        
+        - Cuando caiga, comprar en la siguiente vela que el cierre supere la ema 25
+        
+        - Una vez comprada, poner stop loss en ema50 y limit en 1,5*diferencia al stop loss
+        
+    '''
             
             
 def engulfing_strategy (client):
     print("\n")
     print("Engulfing Strategy")
 
-    functions.insert_new_strategy("BTC")
-    '''
     market_prices = bn.bn_get_market_prices(client)
     for i in market_prices:
         #print(trading_state)
@@ -405,24 +406,19 @@ def engulfing_strategy (client):
                             
                             while pd.Series(open_orders).empty == False:
                                 open_orders = client.get_open_orders(symbol = i["symbol"])
-    '''                 
+    return True                    
 
     
 def select_strategy (strategy, client):
     #functions.insert_mode(1, strategy)
     
     if strategy == 1:
-        strategy_scalping_custom(client)
+        return strategy_scalping_custom(client)
         
     if strategy == 2:
-        ema_strategy(client)
+        return ema_strategy(client)
         
     if strategy == 3:
-        engulfing_strategy(client)
+        return engulfing_strategy(client)
         
-    if strategy == 4:
-        print("4")
-        
-    if strategy == 5:
-        print("5")
     
