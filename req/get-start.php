@@ -16,17 +16,16 @@
 	$obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
 	if(!$obj_conexion)
 	{
-		echo "<h3>No se ha podido conectar PHP - MySQL, verifique sus datos.</h3><hr><br>";
+		//echo "<h3>No se ha podido conectar PHP - MySQL, verifique sus datos.</h3><hr><br>";
 	}
 	else
 	{
-		echo "<h3>Conexion Exitosa PHP - MySQL</h3><hr><br>";
+		//echo "<h3>Conexion Exitosa PHP - MySQL</h3><hr><br>";
 	}
-	
-	//print_r ($_POST);
-	
+		
 	$var_consulta= "INSERT INTO execution_mode (type,election) VALUES (".$_POST["modo"].",".$_POST["opcion"].");";
     $var_resultado = $obj_conexion->query($var_consulta);
+<<<<<<< HEAD
 	//$var_resultado = mysqli_fetch_assoc($var_resultado);
 	
 	//exec
@@ -36,3 +35,13 @@
 	$output = exec($command);
 	echo $output;
 	echo "blablablablabla";
+=======
+
+	if (isset($_POST["stack"])) {
+		$sym = strtoupper($_POST["stack"]);
+	}
+	$var_consulta= "INSERT INTO arbitraje_sym (symbol) VALUE ('".$sym."');";
+    $var_resultado = $obj_conexion->query($var_consulta);
+	
+	
+>>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
