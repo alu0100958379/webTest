@@ -3,7 +3,7 @@ import mysql.connector
 from datetime import datetime
 
 
-ENV_SERVER = 0
+ENV_SERVER = 1
 
 def create_conn ():
     if ENV_SERVER == 0:
@@ -17,8 +17,9 @@ def create_conn ():
         conn = mysql.connector.connect(
             host="localhost",
             user="felipe",
-            password="",                #PRIMERO CAMBIAR Y LUEGO INSERTAR PASSWORD
-            database="stats"
+            password="12345678",                #PRIMERO CAMBIAR Y LUEGO INSERTAR PASSWORD
+            database="stats",
+            auth_plugin='mysql_native_password'
             )
     return conn
 

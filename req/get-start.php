@@ -1,6 +1,6 @@
 <?php 
 
-	$ENV_SERVER = 0;
+	$ENV_SERVER = 1;
 
 	if ($ENV_SERVER == 0) {
 		$cons_usuario="root";
@@ -28,3 +28,11 @@
 	$var_consulta= "INSERT INTO execution_mode (type,election) VALUES (".$_POST["modo"].",".$_POST["opcion"].");";
     $var_resultado = $obj_conexion->query($var_consulta);
 	//$var_resultado = mysqli_fetch_assoc($var_resultado);
+	
+	//exec
+	//$command = escapeshellcmd('python3 /var/www/phpmyadmin/bot/mainBot.py &');
+	$command = "/usr/bin/python3 /var/www/phpmyadmin/bot/mainBot.py > /dev/null &";
+
+	$output = exec($command);
+	echo $output;
+	echo "blablablablabla";

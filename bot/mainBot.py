@@ -12,7 +12,6 @@ import re
 import math
 import numpy
 import threading
-import keyboard
 import socketio
 
 import custom_binance as bn
@@ -34,19 +33,25 @@ def stop():
 
 @sio.event
 def llamadaRecibida(data):
+    print("hola")
     if len(data) > 0:
         functions.clean_all()
         arb.arbitraje_state = 1  
         st.trading_state = 1
         t1.join()
         t1.close()
+
         
 
 # standard Python
 #functions.clean_all()
 sio.connect('http://localhost:8000')
 
+time.sleep(2)
 option = functions.get_election()
+
+t1 = threading.Thread(target = stop)
+t1.start()
 
 while (arb.arbitraje_state == 0 and st.trading_state == 0):
     
@@ -55,8 +60,8 @@ while (arb.arbitraje_state == 0 and st.trading_state == 0):
     
     if option[0][1] == '1':
         
-        t1 = threading.Thread(target = stop) 
-        t1.start()
+        #t1 = threading.Thread(target = stop) 
+        #t1.start()
         
         #Claves de conexión con API de BINANCE
         #Correo: tester_ex_0@outlook.com
@@ -78,7 +83,7 @@ while (arb.arbitraje_state == 0 and st.trading_state == 0):
         
         t1 = threading.Thread(target = stop) 
         t1.start()
-    
+
         ###  BINANCE  ###
         #Claves de conexión con API de BINANCE
         #Correo: tester_ex_0@outlook.com
