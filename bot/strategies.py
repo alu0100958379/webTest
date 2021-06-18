@@ -409,7 +409,7 @@ def engulfing_strategy (client):
 
     
 def select_strategy (strategy, client):
-    functions.insert_mode(1, strategy)
+    #functions.insert_mode(1, strategy)
     
     if strategy == 1:
         strategy_scalping_custom(client)

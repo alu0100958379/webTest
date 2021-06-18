@@ -319,19 +319,19 @@ function play() {
 				opcion: opcion
 			},
 			success: function(output) {
-				//alert(output);
+				alert(output);
 			}
 		});
 
 		//console.log("play");
-		$.ajax({
-			url: "main.py",
-			method: 'post',
-			success: function(data)
-			{
-				alert(data);
-			}
-		});
+		//$.ajax({
+		//	url: "main.py",
+		//	method: 'post',
+		//	success: function(data)
+		//	{
+		//		alert(data);
+		//	}
+		//});
 	}
 	else {
 		alert("Debe parar primero el programa");
@@ -340,7 +340,8 @@ function play() {
 }
 
 function stop() {
-	console.log("stop");
+	console.log("Parando...");
+	/*
 	var invocation = new XMLHttpRequest();
 	var url = 'http://localhost:8000/stop';
 
@@ -348,7 +349,20 @@ function stop() {
 		invocation.open('GET', url, true);
 		//invocation.onreadystatechange = handler;
 		invocation.send();
-	}
+	}*/
+
+	$.ajax({
+		type: 'GET',
+		url: "http://18.168.255.244:8000/stop",
+	        success: function(output) {
+  	                //check(output);	
+  	        	alert(output);
+		},
+		error: function(xhr,ajaxOptions,thrownError){
+			alert(xhr);
+			alert(thrownError);
+		}
+	});
 }
 
 
