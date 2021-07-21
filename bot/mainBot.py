@@ -37,21 +37,12 @@ def play():
 #stop
 @sio.event
 def llamadaRecibida(data):
-<<<<<<< HEAD
-    print("hola")
-=======
     #print("adios")
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
     if len(data) > 0:
         functions.clean_all()
         arb.arbitraje_state = 1  
         st.trading_state = 1
-<<<<<<< HEAD
-        t1.join()
-        t1.close()
 
-=======
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
         
 
 #play
@@ -69,7 +60,6 @@ def llamadaRecibida2(data):
 sio.connect('http://localhost:8000')
 
 time.sleep(2)
-<<<<<<< HEAD
 option = functions.get_election()
 
 t1 = threading.Thread(target = stop)
@@ -124,7 +114,6 @@ while (arb.arbitraje_state == 0 and st.trading_state == 0):
         binance_client = bn.bn_init(binance_key_tester_0, binance_secret_tester_0)
          
         ###  EMPIEZA EL ARBITRAJE  ###
-=======
 
 st.trading_state = 0
 arb.arbitraje_state = 0
@@ -139,7 +128,6 @@ while True:
     if len(option) > 0:
         if option[0][1] != '0':
             print("OPCION: ", option[0][1], " ELECCION: ", option[0][2])
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
         
         if option[0][1] == '1':
             
