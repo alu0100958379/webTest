@@ -8,28 +8,28 @@ include "functions.php"
 	$election = "";
 	if (isset($mode_info["type"]) && $mode_info["type"] == 1)
 	{
-		$mode = "TRADING MODE";
+		$mode = "MODO TRADING";
 		if ($mode_info["election"] == 1)
 		{
-			$election = "CUSTOM STRATEGY";
+			$election = "ESTRATEGIA PERSONALIZADA";
 			
 		} else if ($mode_info["election"] == '2')
 		{
-			$election = "EMA STRATEGY";
+			$election = "ESTRATEGIA BASADA EN EMA";
 		} else if ($mode_info["election"] == '3')
 		{
-			$election = "ENGULFING PATTERN STRATEGY";
+			$election = "ESTRATEGIA BASADA EN PATRÓN ENVOLVENTE";
 		}
 	} else if (isset($mode_info["type"]) && $mode_info["type"] == 2)
 	{
-		$mode = "ARBITRAGE MODE";
+		$mode = "MODO ARBITRAJE";
 		if ($mode_info["election"] == '1')
 		{
-			$election = "ARBITRAGE WITH TRANSFERENCE";
+			$election = "ARBITRAJE CON TRANSFERENCIA";
 			
 		} else if ($mode_info["election"] == '2')
 		{
-			$election = "BUY/SELL ARBITRAGE (STAKING)";
+			$election = "ARBITRAJE CON COMPRA/VENTA (STAKING)";
 		}
 	}
 
@@ -63,17 +63,17 @@ include "functions.php"
 		<div class="container-login100">
 		<div class="wrap-login100" style="padding-bottom: 3%!important; ">
 			<div class ="col-sm-12">
-				<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+				<img class="d-block mx-auto mb-4" src="img/logos-criptos/logo.png" alt="" width="80" height="100" style="margin-top:20px !important">
 			</div>	
 			<div class ="col-sm-12 extra">
 				<form class="myform">		  
 					<select id="options" class="custom-select">
-					  <option value="" disabled selected>Select an option</option>
+					  <option value="" disabled selected>Selecciona un tipo</option>
 					  <option value="TRADING">TRADING</option>
 					  <option value="ARBITRAJE">ARBITRAJE</option>
 					</select><br><br>
 					<select id="choices" class="custom-select">
-					  <option value="" disabled selected>Please select an option</option>
+					  <option value="" disabled selected>Selecciona una opción</option>
 					</select><br><br>
 					<div id="cripto" class="center">
 						<label for="criptomoneda">CRIPTOMONEDA:</label>
@@ -98,7 +98,7 @@ include "functions.php"
 						<div class="row" style="border-radius: 10px;box-shadow: 0 0 25px 10px grey">
 							<?php
 							if (isset($pair["symbol"])) {
-								if ($mode == "TRADING MODE") {
+								if ($mode == "MODO TRADING") {
 									if ($pair["state"] == 0) 
 										echo '				
 										<div id="containerLogo" class="col-md-4">
@@ -124,7 +124,7 @@ include "functions.php"
 										</div>
 										';
 								} else
-									if ($election == "ARBITRAGE WITH TRANSFERENCE") {
+									if ($election == "ARBITRAJE CON TRANSFERENCIA") {
 										if ($pair["state"] == 0)  
 										echo '
 										<div id="containerLogo" class="col-md-4"><div><b>BINANCE</b></div>
@@ -153,21 +153,21 @@ include "functions.php"
 										if (isset($pair['way']) && $pair['way'] == 0)
 										echo '
 										<div id="containerLogo" class="col-md-6"><div><b>BINANCE</b></div>
-											<div><img class="img-fluid" src="img/logos-criptos/'.$crypto_route.'"></div>
+											<p><img src="img/logos-criptos/'.$crypto_route.'" width="140" height="120" frameBorder="0"></p>
 										</div>
 
 										<div id="containerLogo" class="col-md-6"><div><b>KUCOIN</b></div>
-											<img class="img-fluid" src="img/logos-criptos/'.$udst_route.'">
+											<p><img src="img/logos-criptos/'.$udst_route.'" width="140" height="120" frameBorder="0"></p>
 										</div>
 										';
 										else if (isset($pair['way']) && $pair['way'] == 1)
 										echo '
 										<div id="containerLogo" class="col-md-6"><div><b>BINANCE</b></div>
-											<div><img class="img-fluid" src="img/logos-criptos/'.$udst_route.'"></div>
+											<p><img src="img/logos-criptos/'.$udst_route.'" width="140" height="120" frameBorder="0"></p>
 										</div>
 
 										<div id="containerLogo" class="col-md-6"><div><b>KUCOIN</b></div>
-											<img class="img-fluid" src="img/logos-criptos/'.$crypto_route.'">
+											<p><img src="img/logos-criptos/'.$crypto_route.'" width="140" height="120" frameBorder="0"></p>
 										</div>
 										';
 							} 
@@ -332,9 +332,9 @@ function stop() {
 	}
 }
 
-
+/*
 setTimeout(function(){
    window.location.reload(1);
-}, 5000);
+}, 5000);*/
 </script>
 

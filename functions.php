@@ -56,7 +56,7 @@ function get_mode ()
 function get_actual_pair($mode)
 {
 	$obj_conexion = create_conn();
-	if ($mode == "TRADING MODE") 
+	if ($mode == "MODO TRADING") 
 		$var_consulta= "SELECT * FROM trading_stats WHERE id=(SELECT MAX(id) FROM trading_stats)";
 	else 
 		$var_consulta= "SELECT * FROM arbitraje_stats WHERE id=(SELECT MAX(id) FROM arbitraje_stats)";
