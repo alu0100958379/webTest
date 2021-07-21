@@ -25,17 +25,6 @@
 		
 	$var_consulta= "INSERT INTO execution_mode (type,election) VALUES (".$_POST["modo"].",".$_POST["opcion"].");";
     $var_resultado = $obj_conexion->query($var_consulta);
-<<<<<<< HEAD
-	//$var_resultado = mysqli_fetch_assoc($var_resultado);
-	
-	//exec
-	//$command = escapeshellcmd('python3 /var/www/phpmyadmin/bot/mainBot.py &');
-	$command = "/usr/bin/python3 /var/www/phpmyadmin/bot/mainBot.py > /dev/null &";
-
-	$output = exec($command);
-	echo $output;
-	echo "blablablablabla";
-=======
 
 	if (isset($_POST["stack"])) {
 		$sym = strtoupper($_POST["stack"]);
@@ -44,4 +33,3 @@
     $var_resultado = $obj_conexion->query($var_consulta);
 	
 	
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
