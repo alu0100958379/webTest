@@ -37,11 +37,21 @@ def play():
 #stop
 @sio.event
 def llamadaRecibida(data):
+<<<<<<< HEAD
+    print("hola")
+=======
     #print("adios")
+>>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
     if len(data) > 0:
         functions.clean_all()
         arb.arbitraje_state = 1  
         st.trading_state = 1
+<<<<<<< HEAD
+        t1.join()
+        t1.close()
+
+=======
+>>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
         
 
 #play
@@ -59,6 +69,62 @@ def llamadaRecibida2(data):
 sio.connect('http://localhost:8000')
 
 time.sleep(2)
+<<<<<<< HEAD
+option = functions.get_election()
+
+t1 = threading.Thread(target = stop)
+t1.start()
+
+while (arb.arbitraje_state == 0 and st.trading_state == 0):
+    
+    st.trading_state = 0
+    arb.arbitraje_state = 0
+    
+    if option[0][1] == '1':
+        
+        #t1 = threading.Thread(target = stop) 
+        #t1.start()
+        
+        #Claves de conexión con API de BINANCE
+        #Correo: tester_ex_0@outlook.com
+        api_key_tester_0 = 'ljGooMh23pyX6HoeTKVVM9ZqjBqx1kI5GFPS0ycuFOIohhv5l20NbKuP5mxFAIQT'
+        api_secret_tester_0 = 'uOpgceZXaMUVW19bRPBMeSbe12oDEFWBiZlcZn09pR9Gq9X3TxB1TNJ3gVoVaQdT'
+        
+        #CONEXION CON API
+        client = bn.bn_init(api_key_tester_0, api_secret_tester_0)
+        
+        balance = bn.bn_get_personal_crypto_balance(client)
+        print(balance)
+        
+        st.select_strategy(option[0][2], client)
+        
+        time.sleep(1)
+    
+        
+    if option[0][1] == '2':
+        
+        t1 = threading.Thread(target = stop) 
+        t1.start()
+
+        ###  BINANCE  ###
+        #Claves de conexión con API de BINANCE
+        #Correo: tester_ex_0@outlook.com
+        binance_key_tester_0 = 'ljGooMh23pyX6HoeTKVVM9ZqjBqx1kI5GFPS0ycuFOIohhv5l20NbKuP5mxFAIQT'
+        binance_secret_tester_0 = 'uOpgceZXaMUVW19bRPBMeSbe12oDEFWBiZlcZn09pR9Gq9X3TxB1TNJ3gVoVaQdT'
+        
+        ###  KUCOIN  ###
+        #Claves de conexión con API de KUCOIN
+        #Correo: tester_ex_0@outlook.com
+        kucoin_key_tester_0 = "6092dd428304410006083336"
+        kucoin_secret_tester_0 = "9c72097e-7607-41d0-83e4-cc882f68abdf"
+        kucoin_passphrase_tester_0 = "tester_ex_0"
+        
+        #CONEXION CON API
+        kucoin_client = kc.kc_init(kucoin_key_tester_0, kucoin_secret_tester_0, kucoin_passphrase_tester_0)
+        binance_client = bn.bn_init(binance_key_tester_0, binance_secret_tester_0)
+         
+        ###  EMPIEZA EL ARBITRAJE  ###
+=======
 
 st.trading_state = 0
 arb.arbitraje_state = 0
@@ -73,6 +139,7 @@ while True:
     if len(option) > 0:
         if option[0][1] != '0':
             print("OPCION: ", option[0][1], " ELECCION: ", option[0][2])
+>>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
         
         if option[0][1] == '1':
             
