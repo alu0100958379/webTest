@@ -17,11 +17,7 @@ def create_conn ():
         conn = mysql.connector.connect(
             host="localhost",
             user="felipe",
-<<<<<<< HEAD
             password="12345678",                #PRIMERO CAMBIAR Y LUEGO INSERTAR PASSWORD
-=======
-            password="12345678",
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
             database="stats",
             auth_plugin='mysql_native_password'
             )
