@@ -77,8 +77,12 @@ while (arb.arbitraje_state == 0 and st.trading_state == 0):
         
         #Claves de conexión con API de BINANCE
         #Correo: tester_ex_0@outlook.com
-        api_key_tester_0 = 'ljGooMh23pyX6HoeTKVVM9ZqjBqx1kI5GFPS0ycuFOIohhv5l20NbKuP5mxFAIQT'
-        api_secret_tester_0 = 'uOpgceZXaMUVW19bRPBMeSbe12oDEFWBiZlcZn09pR9Gq9X3TxB1TNJ3gVoVaQdT'
+        #api_key_tester_0 = 'ljGooMh23pyX6HoeTKVVM9ZqjBqx1kI5GFPS0ycuFOIohhv5l20NbKuP5mxFAIQT'
+        #api_secret_tester_0 = 'uOpgceZXaMUVW19bRPBMeSbe12oDEFWBiZlcZn09pR9Gq9X3TxB1TNJ3gVoVaQdT'
+
+	#Correo: jorge
+        api_key_tester_0 = 'dqOAKf9uSQ2DfOYZ5DCUPmaDIbJGGzhYrefQP2tmB2L9SYkWm7CEL7E3QHhj9uBy'
+        api_secret_tester_0 = 'dI8SjVDgsHZvj2W9EPH2qUwoIrT3pWMBKx0fcPLhAvsYwHM7glgqOvY5BSMAoSWz'
         
         #CONEXION CON API
         client = bn.bn_init(api_key_tester_0, api_secret_tester_0)
