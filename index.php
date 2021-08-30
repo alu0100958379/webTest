@@ -275,31 +275,6 @@ function play() {
 			opcion = 0;
 		}
 		
-<<<<<<< HEAD
-		var cripto = document.getElementById("campo");
-
-		$.ajax({
-			type: 'POST',
-			url: "req/get-start.php",
-			data: {
-				modo: modo,
-				opcion: opcion
-			},
-			success: function(output) {
-				alert(output);
-			}
-		});
-
-		//console.log("play");
-		//$.ajax({
-		//	url: "main.py",
-		//	method: 'post',
-		//	success: function(data)
-		//	{
-		//		alert(data);
-		//	}
-		//});
-=======
 		var cripto_input = document.getElementById("campo").value;
 		if (modo == 2 && opcion == 2 && cripto_input.length == 0) {
 			alert("Se debe indicar un par. (Ej. btc)")
@@ -319,7 +294,6 @@ function play() {
 			});
 		}
 
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
 	}
 	else {
 		alert("Debe parar primero el programa");
@@ -329,30 +303,6 @@ function play() {
 
 function stop() {
 	console.log("Parando...");
-<<<<<<< HEAD
-	/*
-	var invocation = new XMLHttpRequest();
-	var url = 'http://localhost:8000/stop';
-
-	if(invocation) {
-		invocation.open('GET', url, true);
-		//invocation.onreadystatechange = handler;
-		invocation.send();
-	}*/
-
-	$.ajax({
-		type: 'GET',
-		url: "http://18.168.255.244:8000/stop",
-	        success: function(output) {
-  	                //check(output);	
-  	        	alert(output);
-		},
-		error: function(xhr,ajaxOptions,thrownError){
-			alert(xhr);
-			alert(thrownError);
-		}
-	});
-=======
 
 	$.ajax({
 		url: "req/check-start.php",
@@ -380,12 +330,11 @@ function stop() {
 	else {
 		alert("No hay nada corriendo");
 	}
->>>>>>> ac8d5d7c8e133c383a65591c69aa469b2bec03f1
 }
 
 
-setTimeout(function(){
-   window.location.reload(1);
-}, 5000);
+//setTimeout(function(){
+//   window.location.reload(1);
+//}, 5000);
 </script>
 

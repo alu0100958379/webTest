@@ -1,6 +1,6 @@
 <?php 
 
-	$ENV_SERVER = 1;
+	$ENV_SERVER = 0;
 
 	if ($ENV_SERVER == 0) {
 		$cons_usuario="root";
