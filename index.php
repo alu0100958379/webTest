@@ -316,14 +316,14 @@ function stop() {
 
 		$.ajax({
 			type: 'GET',
-			url: "http://18.168.255.244:8000/stop",
+			url: "http://localhost:8000/stop",
 				success: function(output) {
 						//check(output);	
 					//alert(output);
 			},
 			error: function(xhr,ajaxOptions,thrownError){
-				alert(xhr);
-				alert(thrownError);
+				//alert(xhr);
+				//alert(thrownError);
 			}
 		});
 	}

@@ -273,7 +273,7 @@ def multi_operation_arb(binance_client, kucoin_client, sym):
         custom_buy_init = time.time()
         custom_buy_time = 0
        
-        while custom_buy_time < 3600 and arbitraje_state == 0:
+        while custom_buy_time < 100000 and arbitraje_state == 0:
             
             if arbitraje_state == 1:
                 break

@@ -5,7 +5,6 @@ from datetime import datetime
 
 import time
 
-
 import pandas as pd
 import talib
 import re
@@ -45,7 +44,6 @@ def llamadaRecibida(data):
         
 
 #play
-
 @sio.event
 def llamadaRecibida2(data):
     #print("hola")
@@ -81,7 +79,7 @@ while True:
             if (th == False):
                 t1.start()
 
-            
+            ###  BINANCE  ###
             #Claves de conexión con API de BINANCE
             #Correo: tester_ex_0@outlook.com
             api_key_tester_0 = 'ljGooMh23pyX6HoeTKVVM9ZqjBqx1kI5GFPS0ycuFOIohhv5l20NbKuP5mxFAIQT'
